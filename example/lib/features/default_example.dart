@@ -43,7 +43,7 @@ class _DefaultExampleState extends State<DefaultExample>
     onImageEditingComplete: onImageEditingComplete,
     onCloseEditor: (editorMode) => onCloseEditor(editorMode: editorMode),
     mainEditorCallbacks: MainEditorCallbacks(
-      onMyCustomButtonPressed: () {},
+      onMyCustomButtonPressed: myCustomfUNC,
       helperLines: HelperLinesCallbacks(onLineHit: vibrateLineHit),
     ),
   );

@@ -203,7 +203,27 @@ class MainEditorBottombar extends StatelessWidget {
         key: const ValueKey('open-my-custom-btn'),
         label: 'Benim Butonum',
         icon: Icons.star,
-        onPressed: () {},
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text('Arka planı kaldırmak ister misiniz?'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    // Arka planı kaldırma işlemi yapılacak
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Evet'),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Hayır'),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     ];
   }

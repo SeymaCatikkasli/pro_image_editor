@@ -69,6 +69,8 @@ mixin ExampleHelperState<T extends StatefulWidget> on State<T> {
     setGenerationTime();
   }
 
+  Future<void> myCustomfUNC() async {}
+
   /// Calculates the time taken for the image generation in milliseconds
   /// and stores it in [_generationTime].
   void setGenerationTime() {
