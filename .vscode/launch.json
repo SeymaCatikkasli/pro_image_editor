@@ -7,7 +7,8 @@
         {
             "name": "pro_image_editor",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "flutterMode": "debug",
         },
         {
             "name": "pro_image_editor (profile mode)",
@@ -25,7 +26,8 @@
             "name": "example",
             "cwd": "example",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "program": "main.dart",
         },
         {
             "name": "example (profile mode)",

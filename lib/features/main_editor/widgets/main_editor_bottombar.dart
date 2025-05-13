@@ -123,7 +123,9 @@ class MainEditorBottombar extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         mainAxisSize: MainAxisSize.min,
-                        children: _buildEditorButtons(),
+                        children: _buildEditorButtons(
+                          context,
+                        ),
                       ),
                     ),
                   ),
@@ -137,7 +139,9 @@ class MainEditorBottombar extends StatelessWidget {
   }
 
   /// Builds a list of editor action buttons dynamically
-  List<Widget> _buildEditorButtons() {
+  List<Widget> _buildEditorButtons(
+    BuildContext context,
+  ) {
     return [
       if (configs.paintEditor.enabled)
         _buildActionButton(
@@ -195,6 +199,12 @@ class MainEditorBottombar extends StatelessWidget {
           icon: configs.stickerEditor.icons.bottomNavBar,
           onPressed: openStickerEditor,
         ),
+      _buildActionButton(
+        key: const ValueKey('open-my-custom-btn'),
+        label: 'Benim Butonum',
+        icon: Icons.star,
+        onPressed: () {},
+      ),
     ];
   }
 
@@ -213,3 +223,20 @@ class MainEditorBottombar extends StatelessWidget {
     );
   }
 }
+
+// void _showMyCustomFunction(BuildContext context) {
+//   // Örnek olarak bir dialog gösterebilirsin
+//   showDialog(
+//     context: context,
+//     builder: (context) => AlertDialog(
+//       title: const Text('Butona Bastın'),
+//       content: const Text('Bu senin eklediğin özel fonksiyon!'),
+//       actions: [
+//         TextButton(
+//           onPressed: () => Navigator.pop(context),
+//           child: const Text('Tamam'),
+//         ),
+//       ],
+//     ),
+//   );
+// }

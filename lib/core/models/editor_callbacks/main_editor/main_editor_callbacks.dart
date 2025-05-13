@@ -23,6 +23,7 @@ class MainEditorCallbacks extends StandaloneEditorCallbacks {
     this.onStartCloseSubEditor,
     this.onEndCloseSubEditor,
     this.onScaleStart,
+    this.onMyCustomButtonPressed,
     this.onScaleUpdate,
     this.onScaleEnd,
     this.onEditorZoomScaleStart,
@@ -44,6 +45,8 @@ class MainEditorCallbacks extends StandaloneEditorCallbacks {
   ///
   /// The [Layer] parameter provides information about the added layer.
   final Function(Layer)? onAddLayer;
+
+  final VoidCallback? onMyCustomButtonPressed;
 
   /// A callback function that is triggered when a layer is updated.
   ///

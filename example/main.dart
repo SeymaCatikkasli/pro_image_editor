@@ -1,16 +1,15 @@
+import 'package:example/core/constants/example_constants.dart';
+import 'package:example/core/constants/example_list_constant.dart';
+import 'package:flutter/material.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:example/shared/widgets/not_found_example.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:media_kit/media_kit.dart';
 
 import 'package:pro_image_editor/pro_image_editor.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'core/constants/example_constants.dart';
-import 'core/constants/example_list_constant.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,13 +47,12 @@ class MyApp extends StatelessWidget {
       navigatorObservers: [BotToastNavigatorObserver()],
       debugShowCheckedModeBanner: false,
       onGenerateRoute: (settings) {
-        int index = kImageEditorExamples
-            .indexWhere((example) => example.path == settings.name);
+        int index = kImageEditorExamples.indexWhere(
+          (example) => example.path == settings.name,
+        );
 
         if (index < 0) {
-          return MaterialPageRoute(
-            builder: (_) => const NotFoundExample(),
-          );
+          return MaterialPageRoute(builder: (_) => const NotFoundExample());
         }
 
         return MaterialPageRoute(
@@ -109,15 +107,17 @@ class _MyHomePageState extends State<MyHomePage> {
       value: SystemUiOverlayStyle.light,
       child: ExtendedPopScope(
         child: Scaffold(
-          body: Builder(builder: (_) {
-            if (MediaQuery.sizeOf(context).width >=
-                kImageEditorExampleIsDesktopBreakPoint) {
-              /// Build navigation-rail on large screens
-              return _buildTabletExamples();
-            } else {
-              return _buildMobileExamples();
-            }
-          }),
+          body: Builder(
+            builder: (_) {
+              if (MediaQuery.sizeOf(context).width >=
+                  kImageEditorExampleIsDesktopBreakPoint) {
+                /// Build navigation-rail on large screens
+                return _buildTabletExamples();
+              } else {
+                return _buildMobileExamples();
+              }
+            },
+          ),
         ),
       ),
     );
@@ -136,8 +136,9 @@ class _MyHomePageState extends State<MyHomePage> {
               key: _navigatorKey,
               initialRoute: _initialRoute,
               onGenerateRoute: (settings) {
-                int index = kImageEditorExamples
-                    .indexWhere((example) => example.path == settings.name);
+                int index = kImageEditorExamples.indexWhere(
+                  (example) => example.path == settings.name,
+                );
 
                 if (index < 0) {
                   return MaterialPageRoute(
@@ -147,23 +148,28 @@ class _MyHomePageState extends State<MyHomePage> {
 
                 return PageRouteBuilder(
                   pageBuilder: (_, __, ___) => kImageEditorExamples[index].page,
-                  transitionsBuilder:
-                      (_, animation, secondaryAnimation, child) {
-                    const begin =
-                        Offset(0.0, 0.1); // Start offscreen to the right
+                  transitionsBuilder: (
+                    _,
+                    animation,
+                    secondaryAnimation,
+                    child,
+                  ) {
+                    const begin = Offset(
+                      0.0,
+                      0.1,
+                    ); // Start offscreen to the right
                     const end = Offset.zero; // End at the center
                     const curve = Curves.easeInOut;
 
-                    var tween = Tween(begin: begin, end: end)
-                        .chain(CurveTween(curve: curve));
+                    var tween = Tween(
+                      begin: begin,
+                      end: end,
+                    ).chain(CurveTween(curve: curve));
                     var offsetAnimation = animation.drive(tween);
                     return SlideTransition(
                       position: offsetAnimation,
                       transformHitTests: false,
-                      child: FadeTransition(
-                        opacity: animation,
-                        child: child,
-                      ),
+                      child: FadeTransition(opacity: animation, child: child),
                     );
                   },
                 );
@@ -176,57 +182,53 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildRailBar() {
-    return LayoutBuilder(builder: (_, constraints) {
-      return SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(minHeight: constraints.maxHeight),
-          child: IntrinsicHeight(
-            child: NavigationRail(
-              leading: Column(
-                spacing: 7,
-                children: [
-                  TextButton(
-                    onPressed: _openCodeInGithub,
-                    child: const Text('View code in Github'),
-                  ),
-                  Container(
-                    height: 0.4,
-                    width: 250,
-                    color: Colors.white54,
-                  ),
-                ],
-              ),
-              onDestinationSelected: (index) {
-                if (_railIndex == index) return;
-
-                _navigatorKey.currentState!.pushNamedAndRemoveUntil(
-                  kImageEditorExamples[index].path,
-                  ModalRoute.withName(_initialRoute),
-                );
-                _railIndex = index;
-                setState(() {});
-              },
-              extended: true,
-              destinations: kImageEditorExamples.map((example) {
-                return NavigationRailDestination(
-                  icon: Icon(
-                    example.icon,
-                    color: const Color(0xFFF5F5F5),
-                  ),
-                  label: Text(
-                    example.name,
-                    style: const TextStyle(
-                      color: Color(0xFFF5F5F5),
+    return LayoutBuilder(
+      builder: (_, constraints) {
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+            child: IntrinsicHeight(
+              child: NavigationRail(
+                leading: Column(
+                  spacing: 7,
+                  children: [
+                    TextButton(
+                      onPressed: _openCodeInGithub,
+                      child: const Text('View code in Github'),
                     ),
-                  ),
-                );
-              }).toList(),
-              selectedIndex: _railIndex,
+                    Container(height: 0.4, width: 250, color: Colors.white54),
+                  ],
+                ),
+                onDestinationSelected: (index) {
+                  if (_railIndex == index) return;
+
+                  _navigatorKey.currentState!.pushNamedAndRemoveUntil(
+                    kImageEditorExamples[index].path,
+                    ModalRoute.withName(_initialRoute),
+                  );
+                  _railIndex = index;
+                  setState(() {});
+                },
+                extended: true,
+                destinations: kImageEditorExamples.map((example) {
+                  return NavigationRailDestination(
+                    icon: Icon(
+                      example.icon,
+                      color: const Color(0xFFF5F5F5),
+                    ),
+                    label: Text(
+                      example.name,
+                      style: const TextStyle(color: Color(0xFFF5F5F5)),
+                    ),
+                  );
+                }).toList(),
+                selectedIndex: _railIndex,
+              ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 
   Widget _buildMobileExamples() {
@@ -241,10 +243,7 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 const Text(
                   'Examples',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
                 ),
                 RichText(
                   text: TextSpan(
@@ -279,9 +278,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       .map(
                         (example) => ListTile(
                           onTap: () {
-                            Navigator.of(context).pushNamed(
-                              example.path,
-                            );
+                            Navigator.of(context).pushNamed(example.path);
                           },
                           leading: Icon(example.icon),
                           title: Text(example.name),

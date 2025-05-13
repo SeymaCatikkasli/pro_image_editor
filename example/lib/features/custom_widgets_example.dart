@@ -696,6 +696,7 @@ class _CustomWidgetsExampleState extends State<CustomWidgetsExample>
                       ),
                       onPressed: editor.openEmojiEditor,
                     ),
+
                     /* Be careful with the sticker editor. It's important you 
                     add your own logic how to load items in 
                     `stickerEditorConfigs`.

@@ -23,8 +23,9 @@ import '/core/mixin/example_helper.dart';
 /// ```
 class DefaultExample extends StatefulWidget {
   /// Creates a new [DefaultExample] widget.
-  const DefaultExample({super.key});
-
+  const DefaultExample({
+    super.key,
+  });
   @override
   State<DefaultExample> createState() => _DefaultExampleState();
 }
@@ -42,6 +43,7 @@ class _DefaultExampleState extends State<DefaultExample>
     onImageEditingComplete: onImageEditingComplete,
     onCloseEditor: (editorMode) => onCloseEditor(editorMode: editorMode),
     mainEditorCallbacks: MainEditorCallbacks(
+      onMyCustomButtonPressed: () {},
       helperLines: HelperLinesCallbacks(onLineHit: vibrateLineHit),
     ),
   );
