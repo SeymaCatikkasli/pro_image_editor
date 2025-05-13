@@ -2334,6 +2334,7 @@ class ProImageEditorState extends State<ProImageEditor>
             configs.layerInteraction.hideToolbarOnInteraction
         ? null
         : MainEditorBottombar(
+            callbacks: callbacks,
             controllers: _controllers,
             configs: configs,
             sizesManager: sizesManager,

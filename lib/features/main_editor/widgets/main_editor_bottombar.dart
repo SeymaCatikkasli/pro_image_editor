@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:pro_image_editor/core/models/editor_callbacks/pro_image_editor_callbacks.dart';
 
 import '/core/models/editor_configs/pro_image_editor_configs.dart';
 import '/shared/widgets/flat_icon_text_button.dart';
@@ -42,6 +43,7 @@ class MainEditorBottombar extends StatelessWidget {
     required this.openBlurEditor,
     required this.openEmojiEditor,
     required this.openStickerEditor,
+    required this.callbacks,
   });
 
   /// Manages the main editor's controllers.
@@ -82,6 +84,7 @@ class MainEditorBottombar extends StatelessWidget {
 
   /// Callback for opening the sticker editor.
   final Function() openStickerEditor;
+  final ProImageEditorCallbacks callbacks;
 
   final double _bottomIconSize = 22.0;
   Color get _foregroundColor => configs.mainEditor.style.bottomBarColor;
@@ -123,9 +126,7 @@ class MainEditorBottombar extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         mainAxisSize: MainAxisSize.min,
-                        children: _buildEditorButtons(
-                          context,
-                        ),
+                        children: _buildEditorButtons(context, callbacks),
                       ),
                     ),
                   ),
@@ -140,8 +141,7 @@ class MainEditorBottombar extends StatelessWidget {
 
   /// Builds a list of editor action buttons dynamically
   List<Widget> _buildEditorButtons(
-    BuildContext context,
-  ) {
+      BuildContext context, ProImageEditorCallbacks callbacks) {
     return [
       if (configs.paintEditor.enabled)
         _buildActionButton(
@@ -212,6 +212,9 @@ class MainEditorBottombar extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     // Arka planı kaldırma işlemi yapılacak
+                    callbacks.mainEditorCallbacks!.onMyCustomButtonPressed
+                        ?.call();
+
                     Navigator.pop(context);
                   },
                   child: const Text('Evet'),
