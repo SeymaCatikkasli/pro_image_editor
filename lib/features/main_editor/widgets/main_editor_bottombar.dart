@@ -194,15 +194,14 @@ class MainEditorBottombar extends StatelessWidget {
         ),
       if (configs.stickerEditor.enabled)
         _buildActionButton(
-          key: const ValueKey('open-sticker-editor-btn'),
-          label: configs.i18n.stickerEditor.bottomNavigationBarText,
-          icon: configs.stickerEditor.icons.bottomNavBar,
-          onPressed: openStickerEditor,
-        ),
+            key: const ValueKey('open-sticker-editor-btn'),
+            label: configs.i18n.stickerEditor.bottomNavigationBarText,
+            icon: configs.stickerEditor.icons.bottomNavBar,
+            onPressed: openStickerEditor),
       _buildActionButton(
         key: const ValueKey('open-my-custom-btn'),
-        label: 'Benim Butonum',
-        icon: Icons.star,
+        label: 'Remove Background',
+        icon: Icons.cut,
         onPressed: () {
           callbacks.mainEditorCallbacks!.onMyCustomButtonPressed?.call();
           // showDialog(
