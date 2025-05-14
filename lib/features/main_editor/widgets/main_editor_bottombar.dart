@@ -203,29 +203,29 @@ class MainEditorBottombar extends StatelessWidget {
         label: 'Remove Background',
         icon: Icons.cut,
         onPressed: () {
-          callbacks.mainEditorCallbacks!.onMyCustomButtonPressed?.call();
-          // showDialog(
-          //   context: context,
-          //   builder: (context) => AlertDialog(
-          //     title: const Text('Arka planı kaldırmak ister misiniz?'),
-          //     actions: [
-          //       TextButton(
-          //         onPressed: () {
-          //           // Arka planı kaldırma işlemi yapılacak
-          //           callbacks.mainEditorCallbacks!.onMyCustomButtonPressed
-          //               ?.call();
+          // callbacks.mainEditorCallbacks!.onMyCustomButtonPressed?.call();
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text('Arka planı kaldırmak ister misiniz?'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    // Arka planı kaldırma işlemi yapılacak
+                    callbacks.mainEditorCallbacks!.onMyCustomButtonPressed
+                        ?.call();
 
-          //           Navigator.pop(context);
-          //         },
-          //         child: const Text('Evet'),
-          //       ),
-          //       TextButton(
-          //         onPressed: () => Navigator.pop(context),
-          //         child: const Text('Hayır'),
-          //       ),
-          //     ],
-          //   ),
-          // );
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Evet'),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Hayır'),
+                ),
+              ],
+            ),
+          );
         },
       ),
     ];
