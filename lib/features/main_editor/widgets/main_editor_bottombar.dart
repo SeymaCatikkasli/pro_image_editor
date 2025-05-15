@@ -200,7 +200,7 @@ class MainEditorBottombar extends StatelessWidget {
             onPressed: openStickerEditor),
       _buildActionButton(
         key: const ValueKey('open-my-custom-btn'),
-        label: 'Remove Background',
+        label: 'Remove BG',
         icon: Icons.cut,
         onPressed: () {
           // callbacks.mainEditorCallbacks!.onMyCustomButtonPressed?.call();
@@ -240,7 +240,7 @@ class MainEditorBottombar extends StatelessWidget {
   }) {
     return FlatIconTextButton(
       key: key,
-      label: Text(label, style: _bottomTextStyle),
+      label: Flexible(child: Text(label, style: _bottomTextStyle)),
       icon: Icon(icon, size: _bottomIconSize, color: _foregroundColor),
       onPressed: onPressed,
     );
